@@ -51,11 +51,11 @@ trait BlobExecModifier extends TreeBlobModifier {
       _=> (),
       false
     )
-    // println(s"To execute... $command on $fileName, $fileMask")
     println(s"To execute... $command on $fileName")
     val pb = Process(command, None, "BFG_BLOB" -> entry.objectId.name, "BFG_FILENAME" -> fileName)
     val proc = pb.run(io)
     val exitCode = proc.exitValue
+    println(s"Executed $command on $fileName")
 
     if (exitCode != 0) {
       println(s"Warning: error executing command ${command}  on blob ${entry.objectId.name} with filename {$fileName}: error code {$exitCode}" )
